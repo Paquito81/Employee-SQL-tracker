@@ -7,10 +7,10 @@ VALUES
 ('Radiology'),
 ('Respiratory'),
 ('Nursing'),
-('Oncology')
+('Oncology'),
 ('Telemetry');
 
-INSERT INTO roles (title, salary, department_id)
+INSERT INTO role(title, salary, department_id)
 VALUES
 ('Cardiac Nurse', 63000, 2),
 ('Radiology Technician', 64000, 3),
@@ -18,7 +18,7 @@ VALUES
 ('Medsurge Nurse', 58000, 5),
 ('CNA', 40000, 5),
 ('Oncology Nurse', 62000, 6),
-('Payroll Clerk' 70000, 1),
+('Payroll Clerk', 70000, 1),
 ('Recruting Cordinator', 66000, 1);
 
 
