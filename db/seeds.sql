@@ -1,3 +1,13 @@
+INSERT INTO department (department_name)
+VALUES
+('Human Resources'),
+('Cardiac'),
+('Radiology'),
+('Respiratory'),
+('Nursing'),
+('Oncology');
+
+
 INSERT INTO employee (first_name, last_name, manager_id, role_id)
 VALUES
 ('Jose', 'Saltamonte', null, 4),
