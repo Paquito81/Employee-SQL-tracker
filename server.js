@@ -31,12 +31,21 @@ function create() {
         }
     ]);
 };
-
+//view all employees
 function viewAllEmployees()
-
+db.query(`SELECT * FROM employee`, (err, data) => {
+    console.log(rows);
+});
+//view all departments
 function viewDepartments()
-
+db.query(`SELECT * FROM employee`, (err, data) => {
+    console.log(rows);
+});
+//view all roles
 function viewRoles()
+db.query(`SELECT * FROM employee`, (err, data) => {
+    console.log(rows);
+});
 
 function addEmployee()
 
@@ -48,9 +57,7 @@ app.use((req, res) => {
     res.status(404).end();
 });
 
-db.query(`SELECT * FROM employee`, (err, rows) => {
-    console.log(rows);
-});
+
 
 app.get('api/employee', (req, res) => {
     const sql = `SELECT * FROM employee`;
