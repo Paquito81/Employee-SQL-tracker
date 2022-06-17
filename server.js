@@ -38,6 +38,12 @@ function viewDepartments()
 
 function viewRoles()
 
+function addEmployee()
+
+function addRole()
+
+function addDepartment()
+
 app.use((req, res) => {
     res.status(404).end();
 });
