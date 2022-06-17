@@ -1,21 +1,42 @@
-const express = require('express');
-const PORT = process.env.PORT || 3001;
-const app = express();
 const mysql = require('mysql2');
+const inquirer = require('inquirer');
+const db = require('./config/connection');
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
-const db = mysql.createConnection(
-    {
-        host: 'localhost',
-        user: 'root',
-        //mysql password
-        password: 'Amoamimia3000',
-        database: 'tracker_employee'
-    },
-    console.log('Conected to the tracker_employee database')
-);
+db.connect((err) => {
+    if (err) throw err;
+
+    create();
+});
+
+function create() {
+    inquirer
+    .prompt([
+        {
+            type: 'list',
+            message: 'What would you like to do?',
+            name: 'choices',
+            choices: [
+                "View all Employees",
+                "View departments",
+                "View roles",
+                "Add Employee",
+                "Add Role",
+                "Add Department",
+                "Update an employee role",
+                'Exit'
+            ]
+        }
+    ]);
+};
+
+function viewAllEmployees()
+
+function viewDepartments()
+
+function viewRoles()
 
 app.use((req, res) => {
     res.status(404).end();
@@ -102,6 +123,7 @@ db.query(`DELETE * FROM employee WHERE id =?`, 1, (err, result) => {
     console.log(result);
 
 });
+
 
 
 app.listen(PORT, () => {
