@@ -32,22 +32,56 @@ function create() {
     ]);
 };
 //view all employees
-function viewAllEmployees()
-db.query(`SELECT * FROM employee`, (err, data) => {
-    console.log(rows);
-});
+function viewEmployees(){
+    var employ = `SELECT * FROM employee`;
+      db.query(employ,(err, res) => {
+          if (err) throw err;
+        console.table(res);
+        create();
+      });    
+};
 //view all departments
 function viewDepartments()
-db.query(`SELECT * FROM employee`, (err, data) => {
-    console.log(rows);
+db.query(`SELECT * FROM department`, function (err, data){
+    if (err) throw err;
+    console.table(res);
+    create();
 });
 //view all roles
 function viewRoles()
-db.query(`SELECT * FROM employee`, (err, data) => {
-    console.log(rows);
+db.query(`SELECT * FROM role`, function (err, data){
+    if (err) throw err;
+    console.table(res);
+    create();
 });
 
-function addEmployee()
+function addEmployee() {
+    inquirer
+    .prompt([{
+        name: "firstName",
+        type: "input",
+        message: "What is the employee's first name?",
+    },
+    {
+        name: "lastName",
+        type: "input",
+        message: "What is the employee's last name?",
+
+    },
+    {
+        name: "role",
+        type: "input",
+        message: "What is the role of the employee?",
+
+
+    },
+    {
+        name: "manager",
+        type: "input",
+        message: "Who is the manager?"
+    }
+   ])
+}
 
 function addRole()
 
