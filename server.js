@@ -1,11 +1,23 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
-const db = require('./config/connection');
+// const db = require('./config/connection');
 const consoleTable = require('console.table');
-const e = require('express');
+// const e = require('express');
+const sql = require('mysql2');
 
 // app.use(express.urlencoded({extended: false}));
 // app.use(express.json());
+
+const db = mysql.createConnection(
+    {
+        host: 'localhost',
+        user: 'root',
+        //mysql password
+        password: process.env.DB_PW,
+        database: 'tracker_employee'
+    },
+    console.log('Conected to the tracker_employee database')
+);
 
 db.connect((err) => {
     if (err) throw err;
@@ -46,6 +58,16 @@ function create() {
 
         } else if (answers.create === "Update Employee") {
 
+        } else if (answers.create === "Add Employee") {
+            addEmployee();
+
+        } else if (answers.create === "Add Roles") {
+            addRole();
+
+        } else if (answers.create === "View all Roles") {
+            
+        } else if (answers.create === "Add Department") {
+            addDepartment();
         }
     });
 };
