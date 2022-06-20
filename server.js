@@ -1,14 +1,11 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 // const db = require('./config/connection');
-const consoleTable = require('console.table');
-// const e = require('express');
-const sql = require('mysql2');
-
+const console =  require('console.table');
 // app.use(express.urlencoded({extended: false}));
 // app.use(express.json());
 
-const db = mysql.createConnection(
+const connection = mysql.createConnection(
     {
         host: 'localhost',
         user: 'root',
@@ -19,7 +16,7 @@ const db = mysql.createConnection(
     console.log('Conected to the tracker_employee database')
 );
 
-db.connect((err) => {
+connection.connect(function(err) {
     if (err) throw err;
 
     create();
@@ -74,30 +71,38 @@ function create() {
 
 //view all departments
 function viewDepartments(){
-    var depart = `SELECT * FROM department`;
-      db.query(depart,(err, res) => {
+    // var depart = `SELECT * FROM department`;
+    //   db.query(depart,(err, res) => {
+        connection.query("SELECT id, name AS Department FROM department;",
+        function (err, res) { 
           if (err) throw err;
         console.table(res);
         create();
-      });    
+        
+      }
+    );    
 };
 //view all roles
 function viewRoles(){
-    var rol = `SELECT * FROM role`;
-      db.query(rol,(err, res) => {
+    // var rol = `SELECT * FROM role`;
+    //db.query(rol,(err, res) => {
+    connection.query("SELECT role.title AS Title, role.salary, department.name as Department RFOM role JOIN department ON role.department_id = department.id;",    
+        function (err, res) {
           if (err) throw err;
         console.table(res);
         create();
       });    
-};
+};  
 //view all employees
 function viewEmployees(){
-    var employ = `SELECT * FROM employee`;
-      db.query(employ,(err, res) => {
+    // var employ = `SELECT * FROM employee`;
+    // db.query(employ, (err,res) => {  
+    connection.query("SELECT employee.first_name, employee.last_name, role.title, role.salary, department.name, CONCAT(e.firat_name, ', e.last_name) As Mnager FROM employee INNER JOIN role on role.id = employee.role_id INNER JOIN department on department.id = role.department_id left join employee e on employee.manager.id;",
+        function (err,res) {
           if (err) throw err;
         console.table(res);
         create();
-      });    
+    });    
 };
 
 function addDepartment() {
